@@ -17,29 +17,25 @@ readCase = map read . splitWhen (== ',')
 showSoln :: Soln -> String
 showSoln = unlines . return . show
 
-birthTime = 7 :: Int
-matureAge = 9 :: Int
+matureAge = 2 :: Int
+gestation = 7 :: Int
 targetDay = 256 :: Int
 
--- (Day, (Day + Timer) % birthTime -> Count, (Day + Timer) % matureAge -> Count)
-type Fishtogram = (Int, IntMap Int, IntMap Int)
+-- (day, (day + timer) % (matureAge + gestation) -> population)
+type Fishtogram = (Int, IntMap Int)
 
 initFishtogram :: [Int] -> Fishtogram
-initFishtogram ts = (0, IntMap.fromListWith (+) $ zip ts $ repeat 1, IntMap.empty)
+initFishtogram ts = (0, IntMap.fromListWith (+) $ zip ts $ repeat 1)
 
 stepFishtogram :: Fishtogram -> Fishtogram
-stepFishtogram (d, bs, ms) = (d', bs', ms')
+stepFishtogram (day, phases) = (succ day, phases')
   where
-    d' = succ d
-    bk = d `mod` birthTime
-    mk = d `mod` matureAge
-    b = IntMap.findWithDefault 0 bk bs
-    m = IntMap.findWithDefault 0 mk ms
-    bs' = IntMap.insertWith (+) bk m bs
-    ms' = IntMap.insertWith (+) mk b ms
+    phase = flip mod (matureAge + gestation)
+    parents = IntMap.findWithDefault 0 (phase day) phases
+    phases' = IntMap.insertWith (+) (phase $ day + gestation) parents phases
 
 statFishtogram :: Fishtogram -> Int
-statFishtogram (_, bs, ms) = (sum $ IntMap.elems bs) + (sum $ IntMap.elems ms)
+statFishtogram = sum . IntMap.elems . snd
 
 solve :: Case -> Soln
 solve = statFishtogram . (!! targetDay) . iterate stepFishtogram . initFishtogram
