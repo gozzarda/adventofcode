@@ -1,6 +1,7 @@
-import           Data.IntMap.Strict (IntMap)
 import qualified Data.IntMap.Strict as IntMap
 import           Data.List.Split    (splitWhen)
+import           Data.Sequence      (Seq (..), (<|), (|>))
+import qualified Data.Sequence      as Seq
 
 type Case = [Int]
 type Soln = Int
@@ -21,21 +22,19 @@ matureAge = 2 :: Int
 gestation = 7 :: Int
 targetDay = 80 :: Int
 
--- (day, (day + timer) % (matureAge + gestation) -> population)
-type Fishtogram = (Int, IntMap Int)
+type Fishtogram = Seq Int
 
 initFishtogram :: [Int] -> Fishtogram
-initFishtogram ts = (0, IntMap.fromListWith (+) $ zip ts $ repeat 1)
+initFishtogram ts = Seq.fromFunction (matureAge + gestation) count
+  where
+    counts = IntMap.fromListWith (+) $ zip ts $ repeat 1
+    count t = IntMap.findWithDefault 0 t counts
 
 stepFishtogram :: Fishtogram -> Fishtogram
-stepFishtogram (day, phases) = (succ day, phases')
-  where
-    phase = flip mod (matureAge + gestation)
-    parents = IntMap.findWithDefault 0 (phase day) phases
-    phases' = IntMap.insertWith (+) (phase $ day + gestation) parents phases
+stepFishtogram (count :<| counts) = Seq.adjust' (+ count) (pred gestation) $ counts |> count
 
 statFishtogram :: Fishtogram -> Int
-statFishtogram = sum . IntMap.elems . snd
+statFishtogram = sum
 
 solve :: Case -> Soln
 solve = statFishtogram . (!! targetDay) . iterate stepFishtogram . initFishtogram
