@@ -32,8 +32,8 @@ solveRow (us, os) = map (vals Map.!) $ map Set.fromList os
     [[s1], [s7], [s4], l235, l069, [s8]] = groupOn Set.size $ map Set.fromList us
     ([s9], l06) = partition (s4 `Set.isSubsetOf`) l069
     (l35, [s2]) = partition (`Set.isSubsetOf` s9) l235
-    ([s5], [s3]) = partition ((== 3) . Set.size . (Set.intersection s2)) l35
-    ([s6], [s0]) = partition (s5 `Set.isSubsetOf`) l06
+    ([s0], [s6]) = partition (s1 `Set.isSubsetOf`) l06
+    ([s5], [s3]) = partition (`Set.isSubsetOf` s6) l35
     vals = Map.fromList $ zip [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9] [0..]
 
 digitsToInt :: [Int] -> Int
