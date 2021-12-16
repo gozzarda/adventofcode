@@ -5,8 +5,6 @@ import           Data.Maybe      (catMaybes)
 import           Data.Set        (Set)
 import qualified Data.Set        as Set
 
-import           Debug.Trace     (traceShowId)
-
 type Case = [[Int]]
 type Soln = Int
 
