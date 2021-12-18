@@ -1,0 +1,54 @@
+-- This file contains my notes on an unnecessarily efficient solution to this problem
+
+-- y = sum $ take t $ iterate pred vy
+--   = (vy + (vy - t + 1)) * t / 2
+--   = (2 vy + 1 - t) * t / 2
+--   = (2 vy t + t - t^2) / 2
+-- 2 y = 2 vy t + t - t^2
+-- 2 vy t = t^2 - t + 2 y
+-- Constrain t > 0:
+-- yl <= y <= yu
+-- t^2 - t + 2 yl <= 2 vy t <= t^2 - t + 2 yu
+
+-- Parabola y(t)
+-- Consider for now only the half-parabola that includes (0, 0), since solutions are symmetric about the maximum
+-- Top of arc is always at exactly t = vy (+1), y = (t + 1) * t / 2
+-- Consider for now only positive time solutions, since we can always just consider the negatives of the solutions we find later
+--
+-- If range is above x-axis, the maximum t we need consider is when the top of the arc is exactly yu
+-- This is the latest we can top the arc, because any higher (and therefore faster) would be outside range
+-- (t + 1) * t / 2 <= yu
+-- t >= 1
+--
+-- If range is below x-axis, then the gradient must be negative (because half-parabola)
+-- Similar to above, the longest time it could take for a sample to still be inside the range is to drop it from 0 velocity
+-- (t + 1) * t / 2 <= abs yl
+-- t >= 1
+--
+-- Combining these we get 1 <= t, (t + 1) * t / 2 <= max (abs yl) yu
+--
+-- ts = filter (\t -> (t + 1) * t `div` 2 <= max (abs yl) yu) [1..]
+--
+-- Find integer vy solutions to half-parabola for ts'
+-- Solve t^2 - t + 2 yl <= 2 vy t <= t^2 - t + 2 yu
+-- Have range for vy for each t
+--
+-- For all negative vy solutions, there is also a solution at (2 vy + 1 + t, -vy)
+-- For all positive vy solutions, there is also a solution at (2 vy + 1 - t, vy)
+-- Add these into the solutions list
+--
+-- For each t for which we found a vy solution, now solve for vx, and multiply number of solutions
+-- x(t) is a half parabola for t <= vx and a line for t >= vx
+-- Solve t^2 - t + 2 xl <= 2 xy t <= t^2 - t + 2 xu, similar to for y
+-- Clip resulting range to vx >= t
+--
+-- These are not all vx solutions
+--
+-- Binary search on (abs vx) * (abs vx + 1) / 2 to find range of vx that are in bounds for t >= abs vx
+--
+-- Note that all the solutions found so far can be expressed as linear ranges in vy-t and vx-t space
+-- At every point in time, we want to find the number of points covered by these ranges and multiply these together for vx and vy
+-- This can be solved using a Bentley-Ottman-like scanline to efficiently maintain what ranges are open, but I absolutely do not have the patience for that
+
+-- The above may contain errors, and can probably be reduced/simplified further
+-- Complexity estimate is O(sqrt(Y) log Y) where Y = max (abs yl) (abs yu)
