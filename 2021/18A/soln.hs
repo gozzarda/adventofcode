@@ -29,9 +29,6 @@ showSoln = unlines . return . show
 parseNat :: ReadP Int
 parseNat = read <$> (ReadP.many1 $ ReadP.satisfy isDigit)
 
-parseEither :: ReadP a -> ReadP b -> ReadP (Either a b)
-parseEither lp rp = (Left <$> lp) +++ (Right <$> rp)
-
 parseLeaf :: ReadP SFN
 parseLeaf = Leaf <$> parseNat
 
