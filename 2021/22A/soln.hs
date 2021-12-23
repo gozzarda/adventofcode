@@ -72,6 +72,7 @@ coverage pcs = sum $ zipWith (*) cs ds
     cs = map coverage $ tail $ scanl (&) Set.empty fs
     ds = zipWith subtract ts $ tail ts
 
+solve :: Case -> Soln
 solve = coverage . Set.fromList . zip [0..] . filter f
   where
     f (_, rs) = (<= 50) $ maximum $ map (\(l, u) -> max (abs l) (abs u)) rs
