@@ -24,5 +24,5 @@ solve :: Case -> Soln
 solve = sum . map (itemPriority . head . foldl1 intersect) . chunksOf 3
 
 itemPriority :: Char -> Int
-itemPriority c | 'a' <= c && c <= 'z' = ord c - ord 'a' + 1
-itemPriority c | 'A' <= c && c <= 'Z' = ord c - ord 'A' + 27
+itemPriority c | isAsciiLower c = ord c - ord 'a' + 1
+itemPriority c | isAsciiUpper c = ord c - ord 'A' + 27
