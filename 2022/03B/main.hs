@@ -1,8 +1,7 @@
 module Main where
 
-import Data.Char (ord)
+import Data.Char (isAsciiLower, isAsciiUpper, ord)
 import Data.List (intersect, splitAt)
-import Data.List.Split (chunksOf)
 
 type Case = [String]
 
@@ -22,6 +21,10 @@ showSoln = unlines . return . show
 
 solve :: Case -> Soln
 solve = sum . map (itemPriority . head . foldl1 intersect) . chunksOf 3
+
+chunksOf :: Int -> [a] -> [[a]]
+chunksOf _ [] = []
+chunksOf n xs = let (c, xs') = splitAt n xs in c : chunksOf n xs'
 
 itemPriority :: Char -> Int
 itemPriority c | isAsciiLower c = ord c - ord 'a' + 1

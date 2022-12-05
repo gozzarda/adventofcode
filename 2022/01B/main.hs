@@ -1,7 +1,7 @@
 module Main where
 
-import Data.List (sortBy)
-import Data.List.Split (splitWhen)
+import Data.Function (on)
+import Data.List (groupBy, sortBy)
 
 type Case = [[Int]]
 
@@ -15,6 +15,9 @@ process = showSoln . solve . readCase
 
 readCase :: String -> Case
 readCase = map (map read) . splitWhen null . lines
+
+splitWhen :: (a -> Bool) -> [a] -> [[a]]
+splitWhen f = filter (not . f . head) . groupBy ((==) `on` f)
 
 showSoln :: Soln -> String
 showSoln = unlines . return . show

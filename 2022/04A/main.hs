@@ -1,7 +1,5 @@
 module Main where
 
-import Data.List.Split (splitOn)
-
 type Range = (Int, Int)
 
 type Case = [(Range, Range)]
@@ -17,11 +15,17 @@ process = showSoln . solve . readCase
 readCase :: String -> Case
 readCase = map readPair . lines
 
+splitBy :: (a -> Bool) -> [a] -> ([a], [a])
+splitBy f = fmap (dropWhile f) . break f
+
+both :: (a -> b) -> (a, a) -> (b, b)
+both f (l, r) = (f l, f r)
+
 readPair :: String -> (Range, Range)
-readPair s = let [l, r] = splitOn "," s in (readRange l, readRange r)
+readPair = both readRange . splitBy (== ',')
 
 readRange :: String -> Range
-readRange s = let [l, u] = splitOn "-" s in (read l, read u)
+readRange = both read . splitBy (== '-')
 
 showSoln :: Soln -> String
 showSoln = unlines . return . show

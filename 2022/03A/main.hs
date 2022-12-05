@@ -1,6 +1,6 @@
 module Main where
 
-import Data.Char (ord)
+import Data.Char (isAsciiLower, isAsciiUpper, ord)
 import Data.List (intersect, splitAt)
 
 type Case = [String]
