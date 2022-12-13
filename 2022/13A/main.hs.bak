@@ -1,0 +1,59 @@
+module Main where
+
+import Data.Char (isDigit)
+import Data.Maybe
+import Text.ParserCombinators.ReadP (ReadP, (+++))
+import qualified Text.ParserCombinators.ReadP as ReadP
+
+data Packet = Atom Int | List [Packet]
+
+type Case = [(Packet, Packet)]
+
+type Soln = Int
+
+main :: IO ()
+main = interact process
+
+process :: String -> String
+process = showSoln . solve . readCase
+
+readCase :: String -> Case
+readCase = fst . fromMaybe (error "Failed to parse case") . listToMaybe . ReadP.readP_to_S parseCase
+
+parseNat :: ReadP Int
+parseNat = read <$> (ReadP.many1 $ ReadP.satisfy isDigit)
+
+parsePacket :: ReadP Packet
+parsePacket = parseAtom +++ parseList
+  where
+    parseAtom = Atom <$> parseNat
+    parseList = List <$> ReadP.between (ReadP.char '[') (ReadP.char ']') (ReadP.sepBy parsePacket (ReadP.char ','))
+
+parsePacketPair :: ReadP (Packet, Packet)
+parsePacketPair = do
+  l <- parsePacket <* ReadP.skipSpaces
+  r <- parsePacket <* ReadP.skipSpaces
+  return (l, r)
+
+parseCase :: ReadP Case
+parseCase = ReadP.skipSpaces *> (ReadP.endBy parsePacketPair ReadP.skipSpaces) <* ReadP.eof
+
+showSoln :: Soln -> String
+showSoln = unlines . return . show
+
+wrap :: Packet -> Packet
+wrap p@(Atom _) = List [p]
+wrap p = p
+
+instance Eq Packet where
+  (==) (Atom lv) (Atom rv) = lv == rv
+  (==) (List ls) (List rs) = ls == rs
+  (==) l r = (wrap l) == (wrap r)
+
+instance Ord Packet where
+  compare (Atom lv) (Atom rv) = compare lv rv
+  compare (List ls) (List rs) = compare ls rs
+  compare l r = compare (wrap l) (wrap r)
+
+solve :: Case -> Soln
+solve = sum . map fst . filter ((/= GT) . snd) . zip [1..] . map (uncurry compare)
