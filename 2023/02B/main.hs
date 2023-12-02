@@ -64,8 +64,6 @@ parseProb = ReadP.sepBy1 parseGame (ReadP.char '\n')
 
 solve :: Prob -> Soln
 solve = sum . map histPower . map gameToHist
-  where
-    limit = Map.fromList [("red", 12), ("green", 13), ("blue", 14)]
 
 handToHist :: Hand -> Map String Int
 handToHist = Map.fromListWith (+) . map swap
