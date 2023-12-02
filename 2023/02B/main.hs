@@ -1,13 +1,9 @@
 module Main where
 
-import Data.Char (isAlpha, isDigit)
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
-import Data.Maybe (fromMaybe, listToMaybe)
+import Data.List (stripPrefix)
+import Data.Map (Map)
+import qualified Data.Map as Map
 import Data.Tuple (swap)
-import Debug.Trace
-import Text.ParserCombinators.ReadP (ReadP)
-import qualified Text.ParserCombinators.ReadP as ReadP
 
 type Hand = [(Int, String)]
 
@@ -27,40 +23,29 @@ showSoln :: Soln -> String
 showSoln = unlines . return . show
 
 readProb :: String -> Prob
-readProb =
-  fst
-    . fromMaybe (error "Failed to parse problem")
-    . listToMaybe
-    . ReadP.readP_to_S (parseProb <* ReadP.skipSpaces <* ReadP.eof)
+readProb = map readGame . lines
+  where
+    readGame s = (game_id, hands)
+      where
+        (header, body) = splitMatch ": " s
+        game_id = read $ snd $ splitMatch " " header
+        hands = readHands body
+    readHands = map readHand . splitMatches "; "
+    readHand = map readCube . splitMatches ", "
+    readCube = (\(pref, suff) -> (read pref, suff)) . splitMatch " "
 
-parseNat :: ReadP Int
-parseNat = read <$> (ReadP.many1 $ ReadP.satisfy isDigit)
+splitMatch :: (Eq a) => [a] -> [a] -> ([a], [a])
+splitMatch d = go []
+  where
+    go pref [] = (reverse pref, [])
+    go pref t@(x : xs) = case stripPrefix d t of
+      Just suff -> (reverse pref, suff)
+      Nothing -> go (x : pref) xs
 
-parseWord :: ReadP String
-parseWord = ReadP.munch1 isAlpha
-
-parseCubes :: ReadP (Int, String)
-parseCubes = do
-  count <- parseNat
-  ReadP.skipSpaces
-  colour <- parseWord
-  return (count, colour)
-
-parseHand :: ReadP Hand
-parseHand = ReadP.sepBy1 parseCubes (ReadP.char ',' <* ReadP.skipSpaces)
-
-parseGame :: ReadP Game
-parseGame = do
-  ReadP.string "Game"
-  ReadP.skipSpaces
-  game_id <- parseNat
-  ReadP.char ':'
-  ReadP.skipSpaces
-  hands <- ReadP.sepBy1 parseHand (ReadP.char ';' <* ReadP.skipSpaces)
-  return (game_id, hands)
-
-parseProb :: ReadP Prob
-parseProb = ReadP.sepBy1 parseGame (ReadP.char '\n')
+splitMatches :: (Eq a) => [a] -> [a] -> [[a]]
+splitMatches d xs = case splitMatch d xs of
+  (pref, []) -> [pref]
+  (pref, suff) -> pref : splitMatches d suff
 
 solve :: Prob -> Soln
 solve = sum . map histPower . map gameToHist
