@@ -25,24 +25,17 @@ readProb s = zip ts ds
 solve :: Prob -> Soln
 solve = product . map (uncurry solveRace)
 
--- Counts n * (t - n) > d
--- Solves t * n - n ^ 2 = d + 1
--- n ^ 2 - t * n + d + 1 = 0
--- delta = sqrt(t ^ 2 - 4 * (d + 1))
--- lwr = ceil((t - delta) / 2)
--- upr = floor((t + delta) / 2)
--- count = upr - lwr + 1
 solveRace :: Int -> Int -> Int
-solveRace t d = (t + delta) `div` 2 + (delta - t) `div` 2 + 1
+solveRace t d = upr - lwr
   where
-    delta2 = t ^ 2 - 4 * (d + 1)
-    delta = expSearch (\x -> delta2 < x * x)
+    score n = n * (t - n)
+    peakn = t `div` 2
+    lwr = binSearch ((> d) . score) 0 (t `div` 2 + 1)
+    upr = binSearch ((<= d) . score) (t `div` 2) t
 
--- Find the first x >= 0 that satisfies step function
-expSearch :: (Int -> Bool) -> Int
-expSearch f = go 0 1
+binSearch :: (Int -> Bool) -> Int -> Int -> Int
+binSearch f = go
   where
-    go l u | not $ f u = go u (u + u)
     go l u | u - l == 1 = l
     go l u =
       let m = (l + u) `div` 2
