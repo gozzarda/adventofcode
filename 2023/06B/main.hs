@@ -25,6 +25,13 @@ readProb s = (t, d)
 solve :: Prob -> Soln
 solve = uncurry solveRace
 
+-- Counts n * (t - n) > d
+-- Solves t * n - n ^ 2 = d + 1
+-- n ^ 2 - t * n + d + 1 = 0
+-- delta = sqrt(t ^ 2 - 4 * (d + 1))
+-- lwr = ceil((t - delta) / 2)
+-- upr = floor((t + delta) / 2)
+-- count = upr - lwr + 1
 solveRace :: Int -> Int -> Int
 solveRace t d = (t + delta) `div` 2 + (delta - t) `div` 2 + 1
   where
