@@ -2,9 +2,9 @@ module Main where
 
 import Data.Maybe (fromJust)
 
-type Prob = (Integer, Integer)
+type Prob = (Int, Int)
 
-type Soln = Integer
+type Soln = Int
 
 main :: IO ()
 main = interact process
@@ -25,12 +25,13 @@ readProb s = (t, d)
 solve :: Prob -> Soln
 solve = uncurry solveRace
 
-solveRace :: Integer -> Integer -> Integer
+solveRace :: Int -> Int -> Int
 solveRace t d = (t + delta) `div` 2 + (delta - t) `div` 2 + 1
   where
     delta2 = t ^ 2 - 4 * (d + 1)
-    delta = bs 0 delta2
-    bs l u | l == u = l
+    delta = bs 0 1
+    bs l u | u * u <= delta2 = bs u (u + u)
+    bs l u | l + 1 == u = l
     bs l u =
-      let m = (l + u + 1) `div` 2
-       in if delta2 < (m * m) then bs l (m - 1) else bs m u
+      let m = (l + u) `div` 2
+       in if delta2 < (m * m) then bs l m else bs m u
