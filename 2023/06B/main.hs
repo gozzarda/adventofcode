@@ -36,9 +36,14 @@ solveRace :: Int -> Int -> Int
 solveRace t d = (t + delta) `div` 2 + (delta - t) `div` 2 + 1
   where
     delta2 = t ^ 2 - 4 * (d + 1)
-    delta = bs 0 1
-    bs l u | u * u <= delta2 = bs u (u + u)
-    bs l u | l + 1 == u = l
-    bs l u =
+    delta = expSearch (\x -> delta2 < x * x)
+
+-- Find the first x >= 0 that satisfies step function
+expSearch :: (Int -> Bool) -> Int
+expSearch f = go 0 1
+  where
+    go l u | not $ f u = go u (u + u)
+    go l u | u - l == 1 = l
+    go l u =
       let m = (l + u) `div` 2
-       in if delta2 < (m * m) then bs l m else bs m u
+       in if f m then go l m else go m u
