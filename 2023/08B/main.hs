@@ -4,7 +4,6 @@ import Data.Char (isAlphaNum)
 import Data.List (findIndices, foldl1, intersect)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
-import Debug.Trace
 
 type Vert = String
 
