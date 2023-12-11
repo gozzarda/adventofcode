@@ -1,7 +1,5 @@
 module Main where
 
-import Data.List (unfoldr)
-
 type Prob = [[Int]]
 
 type Soln = Int
