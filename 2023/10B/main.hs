@@ -69,7 +69,7 @@ pipesToAdjList ips = Map.intersectionWith intersect insm $ transposeAdjList insm
     insm = Map.fromList $ map (\(i, p) -> (i, pipeNeighbours i p)) ips
 
 solve :: Prob -> Soln
-solve css = (length path) `div` 2
+solve css = (abs $ doublePolyArea path `div` 2) - (length path `div` 2) + 1
   where
     pss = (map . map) toPipe css
     ipss = zipWith zip [[(r, c) | c <- [0 ..]] | r <- [0 ..]] pss
@@ -83,3 +83,9 @@ walkCycle insm root = go Nothing root
   where
     go (Just _) curr | curr == root = []
     go mprev curr = curr : go (Just curr) (head $ filter ((/= mprev) . Just) $ (Map.!) insm curr)
+
+doublePolyArea :: [Coord] -> Int
+doublePolyArea ps = sum $ zipWith areaProd ps (tail $ cycle ps)
+
+areaProd :: Coord -> Coord -> Int
+areaProd (lx, ly) (rx, ry) = lx * ry - rx * ly
