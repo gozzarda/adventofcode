@@ -2,8 +2,6 @@ module Main where
 
 import Data.List (elemIndex, inits, stripPrefix, tails, transpose)
 
-import Debug.Trace
-
 type Prob = [[[Char]]]
 
 type Soln = Int
