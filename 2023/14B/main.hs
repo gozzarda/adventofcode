@@ -2,8 +2,6 @@ module Main where
 
 import Data.List (findIndices, partition, span, transpose)
 
-import Debug.Trace
-
 data Tile = Block | Round | Empty deriving (Ord, Eq)
 
 type Prob = [[Tile]]
@@ -28,8 +26,7 @@ readTile 'O' = Round
 readTile '.' = Empty
 
 solve :: Prob -> Soln
-solve = gridLoad . extrapolateCycle 1_000_000_000 (traceGrid . step)
-
+solve = gridLoad . extrapolateCycle 1_000_000_000 step
 gridLoad :: [[Tile]] -> Int
 gridLoad = sum . zipWith (*) [1 ..] . reverse . map (length . filter (== Round))
 
@@ -66,13 +63,3 @@ extrapolateCycle n f x = ys !! n'
 evens :: [a] -> [a]
 evens (x : _ : xs) = x : evens xs
 evens xs = xs
-
-showGrid :: [[Tile]] -> String
-showGrid = unlines . (map . map) f
-  where
-    f Block = '#'
-    f Round = 'O'
-    f Empty = '.'
-
-traceGrid :: [[Tile]] -> [[Tile]]
-traceGrid x = trace (showGrid x) x
