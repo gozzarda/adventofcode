@@ -1,9 +1,10 @@
 module Main where
 
-import Data.List (elemIndex)
+import Data.Char (intToDigit)
+import Data.Containers.ListUtils (nubOrd)
+import Data.List (elemIndex, group, sort, sortOn)
 import Data.Maybe
-import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Tuple (swap)
 import Debug.Trace
 import Text.ParserCombinators.ReadP
 import qualified Text.ParserCombinators.ReadPrec as ReadPrec
@@ -86,30 +87,68 @@ vmod :: Vec2 -> Vec2 -> Vec2
 vmod = both2 mod
 
 solve :: Prob -> Soln
-solve (wh, pvs) = trace (drawVecs wh $ Set.fromList $ pss !! i) i
+solve (wh, pvs) = trace (showVecs wh ps) r
   where
     (w, h) = wh
-    wm = w `div` 2
-    hm = h `div` 2
-    m = (wm, hm)
-    (ps, vs) = unzip pvs
-    pss = take (w * h) $ iterate (zipWith (\v p -> p `vadd` v `vmod` wh) vs) ps
-    biggests = map (maximum . blobSizes . Set.fromList) pss
-    biggest = maximum biggests
-    i = fromJust $ elemIndex biggest biggests
+    psAt t = map (\(p, v) -> p `vadd` (v `vmul` t) `vmod` wh) pvs
+    pss = map psAt [0 ..]
+    (xns, yns) = unzip $ map (xyhists wh) pss
+    xmi = clusterIndex $ take w xns
+    ymi = clusterIndex $ take h yns
+    (r, m) = crt [(xmi, w), (ymi, h)]
+    ps = map (\(p, v) -> p `vadd` (v `vmul` r) `vmod` wh) pvs
 
-dirs :: [Vec2]
-dirs = [(-1, 0), (0, -1), (0, 1), (1, 0)]
-
-blobSizes :: Set Vec2 -> [Int]
-blobSizes vs = go vs
+xyhists :: Vec2 -> [Vec2] -> ([Int], [Int])
+xyhists (w, h) ps = (histogram w xs, histogram h ys)
   where
-    go vs = case Set.lookupMin vs of
-      Nothing -> []
-      Just v -> let (vs', n) = dfs (vs, 0) v in n : go vs'
-      where
-        dfs (vs, n) v | Set.notMember v vs = (vs, n)
-        dfs (vs, n) v = foldl dfs (Set.delete v vs, succ n) (map (both2 (+) v) dirs)
+    (xs, ys) = unzip $ nubOrd ps -- Only count one robot at each location
 
-drawVecs :: Vec2 -> Set Vec2 -> String
-drawVecs (w, h) vs = unlines [[if Set.member (x, y) vs then 'X' else '.' | x <- [0 .. w - 1]] | y <- [0 .. h - 1]]
+histogram :: Int -> [Int] -> [Int]
+histogram n xs = map (pred . length) $ group $ sort $ [0 .. n - 1] ++ xs'
+  where
+    xs' = filter (\x -> 0 <= x && x < n) xs
+
+-- The index into xss of the most clustered list
+clusterIndex :: [[Int]] -> Int
+clusterIndex xss = fromJust $ elemIndex (maximum mws) mws
+  where
+    n = minimum (map length xss) `div` 2
+    mws = map (maxWindow n) xss
+
+-- maxWindow n xs gives the maximum sum of any n-length window in maxWindow
+maxWindow :: Int -> [Int] -> Int
+maxWindow n xs = maximum windowSums
+  where
+    prefixSums = scanl (+) 0 xs
+    windowSums = zipWith subtract prefixSums $ drop n prefixSums
+
+crt :: (Integral a, Foldable t) => t (a, a) -> (a, a)
+crt = foldr go (0, 1)
+  where
+    go (rl, ml) (rr, mr) = (mod r m, m)
+      where
+        r = rr + mr * (rl - rr) * inv mr ml
+        m = mr * ml
+    inv a m = s `mod` m
+      where
+        (_, s, _) = gcd' a m
+    gcd' 0 b = (b, 0, 1)
+    gcd' a b = (g, t - div b a * s, s)
+      where
+        (g, s, t) = gcd' (mod b a) a
+
+gridHist :: Vec2 -> [Vec2] -> [[Int]]
+gridHist (w, h) = go (0, 0) . sortOn swap . filter inBounds
+  where
+    inBounds (x, y) = 0 <= x && x < w && 0 <= y && y < h
+    go (x, y) _ | y == h = []
+    go (x, y) vs | x == w = [] : go (0, succ y) vs
+    go (x, y) vs =
+      let (xys, vs') = span (== (x, y)) vs
+          (ns : nss) = go (succ x, y) vs'
+       in (length xys : ns) : nss
+
+showVecs :: Vec2 -> [Vec2] -> String
+showVecs wh = unlines . (map . map) f . gridHist wh
+  where
+    f n = if n == 0 then '.' else intToDigit n
