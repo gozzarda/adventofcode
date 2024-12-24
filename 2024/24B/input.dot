@@ -1,0 +1,446 @@
+digraph {
+    ppw [label="ppw: AND"]
+    ppw -> {x04 y04}
+    jjs [label="jjs: XOR"]
+    jjs -> {x37 y37}
+    nkr [label="nkr: XOR"]
+    nkr -> {x24 y24}
+    z34 [label="z34: XOR"]
+    z34 -> {cdn stb}
+    bbq [label="bbq: AND"]
+    bbq -> {prb rvw}
+    tkn [label="tkn: AND"]
+    tkn -> {srp kgv}
+    qdg [label="qdg: AND"]
+    qdg -> {hpw kph}
+    qpr [label="qpr: AND"]
+    qpr -> {x37 y37}
+    tsn [label="tsn: AND"]
+    tsn -> {fwh tnk}
+    vnc [label="vnc: LOR"]
+    vnc -> {kwk mhb}
+    qnv [label="qnv: AND"]
+    qnv -> {kjr dnq}
+    grm [label="grm: XOR"]
+    grm -> {x25 y25}
+    fwr [label="fwr: XOR"]
+    fwr -> {x15 y15}
+    ddd [label="ddd: AND"]
+    ddd -> {y31 x31}
+    pbd [label="pbd: AND"]
+    pbd -> {cpv fwr}
+    nbc [label="nbc: AND", style=filled, fillcolor=lightpink]
+    nbc -> {y05 x05}
+    chk [label="chk: AND"]
+    chk -> {y27 x27}
+    dbd [label="dbd: LOR"]
+    dbd -> {bdv grk}
+    ppj [label="ppj: AND"]
+    ppj -> {fnp grm}
+    hfn [label="hfn: LOR"]
+    hfn -> {frc chk}
+    nmh [label="nmh: LOR"]
+    nmh -> {bpm gjv}
+    gdg [label="gdg: AND"]
+    gdg -> {y20 x20}
+    wbd [label="wbd: AND"]
+    wbd -> {x00 y00}
+    z02 [label="z02: XOR"]
+    z02 -> {vnc msc}
+    kjh [label="kjh: LOR"]
+    kjh -> {nhq cvj}
+    fpb [label="fpb: AND"]
+    fpb -> {x11 y11}
+    mjm [label="mjm: LOR"]
+    mjm -> {tkj kdt}
+    nfp [label="nfp: LOR"]
+    nfp -> {bhr bbq}
+    swv [label="swv: AND"]
+    swv -> {nkr ngq}
+    kwc [label="kwc: AND"]
+    kwc -> {x06 y06}
+    frc [label="frc: AND"]
+    frc -> {kjh qjd}
+    hpf [label="hpf: AND"]
+    hpf -> {pgb gsb}
+    dwt [label="dwt: AND"]
+    dwt -> {x22 y22}
+    vnm [label="vnm: LOR"]
+    vnm -> {ftj ksd}
+    wcw [label="wcw: XOR"]
+    wcw -> {x06 y06}
+    rbm [label="rbm: AND"]
+    rbm -> {jqt jjs}
+    rnc [label="rnc: XOR"]
+    rnc -> {y07 x07}
+    stb [label="stb: LOR"]
+    stb -> {rcb bps}
+    bps [label="bps: AND"]
+    bps -> {y33 x33}
+    bng [label="bng: AND"]
+    bng -> {x32 y32}
+    jms [label="jms: LOR"]
+    jms -> {rfn wnd}
+    z40 [label="z40: XOR"]
+    z40 -> {nqp sbn}
+    z41 [label="z41: XOR"]
+    z41 -> {kfv jmc}
+    vdk [label="vdk: LOR"]
+    vdk -> {tkn bng}
+    vjc [label="vjc: AND"]
+    vjc -> {x08 y08}
+    z18 [label="z18: XOR"]
+    z18 -> {dbd tcb}
+    phn [label="phn: AND"]
+    phn -> {ttw ckr}
+    tkj [label="tkj: AND"]
+    tkj -> {x43 y43}
+    fnr [label="fnr: AND", style=filled, fillcolor=lightpink]
+    fnr -> {fsp bdr}
+    z45 [label="z45: LOR"]
+    z45 -> {sgk hww}
+    qrs [label="qrs: AND"]
+    qrs -> {y19 x19}
+    mdg [label="mdg: XOR"]
+    mdg -> {y14 x14}
+    jfn [label="jfn: LOR"]
+    jfn -> {vjc hdf}
+    nqp [label="nqp: XOR"]
+    nqp -> {y40 x40}
+    bbm [label="bbm: AND"]
+    bbm -> {rbr kqk}
+    rfq [label="rfq: XOR"]
+    rfq -> {x31 y31}
+    hpw [label="hpw: XOR"]
+    hpw -> {y23 x23}
+    ggt [label="ggt: XOR"]
+    ggt -> {x44 y44}
+    sgk [label="sgk: AND"]
+    sgk -> {mjm ggt}
+    bhr [label="bhr: AND"]
+    bhr -> {x03 y03}
+    cqp [label="cqp: LOR"]
+    cqp -> {kwc fcv}
+    dtn [label="dtn: XOR"]
+    dtn -> {y19 x19}
+    sbh [label="sbh: AND"]
+    sbh -> {cdq vsd}
+    cqf [label="cqf: LOR"]
+    cqf -> {bvw gdg}
+    mcc [label="mcc: AND"]
+    mcc -> {y02 x02}
+    rvw [label="rvw: XOR"]
+    rvw -> {x03 y03}
+    kqk [label="kqk: LOR", style=filled, fillcolor=lightpink]
+    kqk -> {dkk pbd}
+    bvw [label="bvw: AND"]
+    bvw -> {shj wdd}
+    drg [label="drg: LOR"]
+    drg -> {ppj hjr}
+    dck [label="dck: LOR"]
+    dck -> {jkn ktm}
+    pcj [label="pcj: LOR"]
+    pcj -> {sbh tcr}
+    bbc [label="bbc: LOR"]
+    bbc -> {djp fwn}
+    vvf [label="vvf: XOR"]
+    vvf -> {x35 y35}
+    cvj [label="cvj: AND"]
+    cvj -> {x26 y26}
+    z05 [label="z05: XOR"]
+    z05 -> {rgq svm}
+    skn [label="skn: AND"]
+    skn -> {svm rgq}
+    qpv [label="qpv: AND"]
+    qpv -> {x41 y41}
+    z33 [label="z33: XOR"]
+    z33 -> {qdt vdk}
+    z44 [label="z44: XOR"]
+    z44 -> {ggt mjm}
+    z07 [label="z07: XOR"]
+    z07 -> {rnc cqp}
+    rgq [label="rgq: LOR"]
+    rgq -> {ppw brg}
+    fwh [label="fwh: LOR"]
+    fwh -> {pbv jrm}
+    z39 [label="z39: XOR", style=filled, fillcolor=lightpink]
+    z39 -> {bdr fsp}
+    srp [label="srp: XOR"]
+    srp -> {x32 y32}
+    jqt [label="jqt: LOR"]
+    jqt -> {rwt tsn}
+    stf [label="stf: XOR"]
+    stf -> {y28 x28}
+    dkk [label="dkk: AND"]
+    dkk -> {y15 x15}
+    z14 [label="z14: XOR"]
+    z14 -> {mdg tdb}
+    bnb [label="bnb: AND"]
+    bnb -> {nqp sbn}
+    gjv [label="gjv: AND"]
+    gjv -> {cdn stb}
+    prb [label="prb: LOR"]
+    prb -> {wdv mcc}
+    z29 [label="z29: XOR"]
+    z29 -> {mdn vnm}
+    mpv [label="mpv: XOR"]
+    mpv -> {x30 y30}
+    kng [label="kng: XOR"]
+    kng -> {y11 x11}
+    jrm [label="jrm: AND"]
+    jrm -> {x35 y35}
+    jcb [label="jcb: AND"]
+    jcb -> {smn nnw}
+    rwv [label="rwv: AND"]
+    rwv -> {x10 y10}
+    ngq [label="ngq: LOR"]
+    ngq -> {qdg cgq}
+    pbv [label="pbv: AND"]
+    pbv -> {nmh vvf}
+    jjm [label="jjm: XOR"]
+    jjm -> {x43 y43}
+    nhq [label="nhq: AND"]
+    nhq -> {bhw drg}
+    pdh [label="pdh: AND"]
+    pdh -> {y09 x09}
+    gsb [label="gsb: XOR"]
+    gsb -> {y38 x38}
+    fpq [label="fpq: AND"]
+    fpq -> {x40 y40}
+    cdq [label="cdq: XOR"]
+    cdq -> {y42 x42}
+    z30 [label="z30: XOR"]
+    z30 -> {jms mpv}
+    djp [label="djp: AND"]
+    djp -> {x18 y18}
+    tdb [label="tdb: LOR"]
+    tdb -> {dhr phn}
+    mkw [label="mkw: XOR"]
+    mkw -> {y21 x21}
+    kjr [label="kjr: LOR"]
+    kjr -> {fpb rpr}
+    bdv [label="bdv: AND"]
+    bdv -> {gcc dhd}
+    z06 [label="z06: XOR"]
+    z06 -> {pdf wcw}
+    z22 [label="z22: XOR"]
+    z22 -> {nnw smn}
+    z11 [label="z11: XOR"]
+    z11 -> {kng rjg}
+    ksd [label="ksd: AND"]
+    ksd -> {hfn stf}
+    pdf [label="pdf: LOR"]
+    pdf -> {skn nbc}
+    rcb [label="rcb: AND"]
+    rcb -> {qdt vdk}
+    tcb [label="tcb: XOR"]
+    tcb -> {y18 x18}
+    pgb [label="pgb: LOR"]
+    pgb -> {qpr rbm}
+    vsd [label="vsd: LOR"]
+    vsd -> {psj qpv}
+    mdn [label="mdn: XOR"]
+    mdn -> {x29 y29}
+    wnw [label="wnw: AND"]
+    wnw -> {dtn bbc}
+    dnq [label="dnq: XOR"]
+    dnq -> {y12 x12}
+    npf [label="npf: LOR"]
+    npf -> {rhs hdk}
+    hdk [label="hdk: AND"]
+    hdk -> {cqp rnc}
+    fnp [label="fnp: LOR"]
+    fnp -> {vbc swv}
+    z04 [label="z04: XOR"]
+    z04 -> {rcw nfp}
+    brb [label="brb: AND"]
+    brb -> {x21 y21}
+    qjd [label="qjd: XOR"]
+    qjd -> {y27 x27}
+    z13 [label="z13: XOR"]
+    z13 -> {ttw ckr}
+    z27 [label="z27: XOR"]
+    z27 -> {qjd kjh}
+    hjr [label="hjr: AND"]
+    hjr -> {x25 y25}
+    kdt [label="kdt: AND"]
+    kdt -> {jjm pcj}
+    fsp [label="fsp: LOR"]
+    fsp -> {hpf phv}
+    z00 [label="z00: XOR"]
+    z00 -> {x00 y00}
+    sbn [label="sbn: LOR"]
+    sbn -> {fnr nrj}
+    rcw [label="rcw: XOR"]
+    rcw -> {x04 y04}
+    jmc [label="jmc: XOR"]
+    jmc -> {x41 y41}
+    hdf [label="hdf: AND"]
+    hdf -> {ktj npf}
+    z20 [label="z20: XOR"]
+    z20 -> {wdd shj}
+    bpm [label="bpm: AND"]
+    bpm -> {x34 y34}
+    z28 [label="z28: XOR"]
+    z28 -> {hfn stf}
+    nnw [label="nnw: LOR"]
+    nnw -> {brb rjf}
+    gcc [label="gcc: LOR"]
+    gcc -> {bbm qbc}
+    dhd [label="dhd: XOR"]
+    dhd -> {x17 y17}
+    spc [label="spc: AND"]
+    spc -> {dck rfq}
+    tnk [label="tnk: XOR"]
+    tnk -> {y36 x36}
+    svm [label="svm: XOR", style=filled, fillcolor=lightpink]
+    svm -> {y05 x05}
+    z36 [label="z36: XOR"]
+    z36 -> {tnk fwh}
+    dqq [label="dqq: XOR"]
+    dqq -> {x01 y01}
+    ftj [label="ftj: AND"]
+    ftj -> {x28 y28}
+    kkq [label="kkq: AND"]
+    kkq -> {y12 x12}
+    z19 [label="z19: XOR"]
+    z19 -> {dtn bbc}
+    msc [label="msc: XOR"]
+    msc -> {y02 x02}
+    z31 [label="z31: XOR"]
+    z31 -> {rfq dck}
+    vws [label="vws: LOR"]
+    vws -> {pdh tjk}
+    bdr [label="bdr: XOR"]
+    bdr -> {y39 x39}
+    z24 [label="z24: XOR"]
+    z24 -> {nkr ngq}
+    dhr [label="dhr: AND"]
+    dhr -> {x13 y13}
+    rpr [label="rpr: AND"]
+    rpr -> {kng rjg}
+    qbc [label="qbc: AND"]
+    qbc -> {y16 x16}
+    vbc [label="vbc: AND"]
+    vbc -> {x24 y24}
+    z26 [label="z26: XOR"]
+    z26 -> {drg bhw}
+    rjf [label="rjf: AND"]
+    rjf -> {mkw cqf}
+    z15 [label="z15: XOR", style=filled, fillcolor=lightpink]
+    z15 -> {fwr cpv}
+    z09 [label="z09: XOR"]
+    z09 -> {jfn fmc}
+    rbr [label="rbr: XOR"]
+    rbr -> {x16 y16}
+    fwn [label="fwn: AND"]
+    fwn -> {tcb dbd}
+    z43 [label="z43: XOR"]
+    z43 -> {jjm pcj}
+    rfn [label="rfn: AND"]
+    rfn -> {y29 x29}
+    z25 [label="z25: XOR"]
+    z25 -> {grm fnp}
+    wdd [label="wdd: XOR"]
+    wdd -> {x20 y20}
+    grk [label="grk: AND"]
+    grk -> {x17 y17}
+    z42 [label="z42: XOR"]
+    z42 -> {vsd cdq}
+    brg [label="brg: AND"]
+    brg -> {nfp rcw}
+    smn [label="smn: XOR"]
+    smn -> {x22 y22}
+    rjg [label="rjg: LOR"]
+    rjg -> {rwv wvf}
+    phv [label="phv: AND"]
+    phv -> {x38 y38}
+    psj [label="psj: AND"]
+    psj -> {jmc kfv}
+    ttw [label="ttw: XOR"]
+    ttw -> {y13 x13}
+    z08 [label="z08: XOR"]
+    z08 -> {npf ktj}
+    wvf [label="wvf: AND"]
+    wvf -> {vws tbk}
+    z16 [label="z16: XOR"]
+    z16 -> {kqk rbr}
+    fcv [label="fcv: AND"]
+    fcv -> {pdf wcw}
+    qdt [label="qdt: XOR"]
+    qdt -> {x33 y33}
+    wfh [label="wfh: AND"]
+    wfh -> {x14 y14}
+    cgq [label="cgq: AND", style=filled, fillcolor=lightpink]
+    cgq -> {x23 y23}
+    bhw [label="bhw: XOR"]
+    bhw -> {x26 y26}
+    ktm [label="ktm: AND"]
+    ktm -> {x30 y30}
+    z12 [label="z12: XOR"]
+    z12 -> {dnq kjr}
+    z32 [label="z32: XOR"]
+    z32 -> {srp kgv}
+    tjk [label="tjk: AND"]
+    tjk -> {jfn fmc}
+    ckr [label="ckr: LOR"]
+    ckr -> {qnv kkq}
+    z23 [label="z23: XOR", style=filled, fillcolor=lightpink]
+    z23 -> {kph hpw}
+    kfv [label="kfv: LOR"]
+    kfv -> {bnb fpq}
+    kph [label="kph: LOR"]
+    kph -> {jcb dwt}
+    z01 [label="z01: XOR"]
+    z01 -> {wbd dqq}
+    wnd [label="wnd: AND"]
+    wnd -> {mdn vnm}
+    z21 [label="z21: XOR"]
+    z21 -> {cqf mkw}
+    mhb [label="mhb: AND"]
+    mhb -> {y01 x01}
+    cdn [label="cdn: XOR"]
+    cdn -> {x34 y34}
+    z17 [label="z17: XOR"]
+    z17 -> {gcc dhd}
+    z37 [label="z37: XOR"]
+    z37 -> {jqt jjs}
+    tbk [label="tbk: XOR"]
+    tbk -> {x10 y10}
+    rhs [label="rhs: AND"]
+    rhs -> {y07 x07}
+    kgv [label="kgv: LOR"]
+    kgv -> {ddd spc}
+    hww [label="hww: AND"]
+    hww -> {x44 y44}
+    rwt [label="rwt: AND"]
+    rwt -> {y36 x36}
+    tcr [label="tcr: AND"]
+    tcr -> {y42 x42}
+    z35 [label="z35: XOR"]
+    z35 -> {nmh vvf}
+    z10 [label="z10: XOR"]
+    z10 -> {vws tbk}
+    jkn [label="jkn: AND"]
+    jkn -> {mpv jms}
+    kwk [label="kwk: AND"]
+    kwk -> {wbd dqq}
+    fmc [label="fmc: XOR"]
+    fmc -> {y09 x09}
+    cpv [label="cpv: LOR"]
+    cpv -> {wfh wth}
+    z38 [label="z38: XOR"]
+    z38 -> {gsb pgb}
+    ktj [label="ktj: XOR"]
+    ktj -> {y08 x08}
+    z03 [label="z03: XOR"]
+    z03 -> {prb rvw}
+    nrj [label="nrj: AND"]
+    nrj -> {x39 y39}
+    wdv [label="wdv: AND"]
+    wdv -> {msc vnc}
+    wth [label="wth: AND"]
+    wth -> {mdg tdb}
+    shj [label="shj: LOR"]
+    shj -> {qrs wnw}
+}
